@@ -6,7 +6,9 @@ const balanceMoney = document.querySelector('.js-balance');
 const bet = document.querySelector('.js-bet');
 const buttonPlayGame = document.querySelector('.js-play');
 const buttonRestart = document.querySelector('.js-restart');
-let userBalance = 50;
+const defaultBalance = 50;
+
+let userBalance = defaultBalance;
 
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
@@ -37,22 +39,28 @@ function handleClickBtn(event) {
 
   setUserBalance();
 
-  if (userBalance === 0 || userBalance >= 200) {
+  if (userBalance === 0) {
     buttonPlayGame.classList.add('hidden');
     buttonRestart.classList.remove('hidden');
-    resultBet.innerHTML = 'No puedes seguir jugando!';
+    resultBet.innerHTML = 'No puedes seguir jugando, la maquina ha ganado!';
+  } else if (userBalance >= 200) {
+    buttonPlayGame.classList.add('hidden');
+    buttonRestart.classList.remove('hidden');
+    resultBet.innerHTML = 'No puedes seguir jugando, has ganado!';
   }
 }
 
 function handleClickBtnRestart(event) {
   event.preventDefault();
-  userBalance = 50;
+
+  userBalance = defaultBalance;
   setUserBalance();
-  resultBet.innerHTML = 'Vamos a jugar!';
   optionPlayer.value = 'placeholder';
   bet.value = '';
+
   buttonPlayGame.classList.remove('hidden');
   buttonRestart.classList.add('hidden');
+  resultBet.innerHTML = 'Vamos a jugar!';
 }
 
 setUserBalance();
