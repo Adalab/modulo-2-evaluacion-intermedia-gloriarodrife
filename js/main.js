@@ -36,7 +36,25 @@ function handleClickBtn(event) {
   }
 
   setUserBalance();
+
+  if (userBalance === 0 || userBalance >= 200) {
+    buttonPlayGame.classList.add('hidden');
+    buttonRestart.classList.remove('hidden');
+    resultBet.innerHTML = 'No puedes seguir jugando!';
+  }
+}
+
+function handleClickBtnRestart(event) {
+  event.preventDefault();
+  userBalance = 50;
+  setUserBalance();
+  resultBet.innerHTML = 'Vamos a jugar!';
+  optionPlayer.value = 'placeholder';
+  bet.value = '';
+  buttonPlayGame.classList.remove('hidden');
+  buttonRestart.classList.add('hidden');
 }
 
 setUserBalance();
 buttonPlayGame.addEventListener('click', handleClickBtn);
+buttonRestart.addEventListener('click', handleClickBtnRestart);
