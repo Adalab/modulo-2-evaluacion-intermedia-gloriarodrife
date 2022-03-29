@@ -1,5 +1,6 @@
 'use strict';
 
+const move = document.querySelector('.js-move');
 const optionPlayer = document.querySelector('.js-option');
 const resultBet = document.querySelector('.js-result');
 const balanceMoney = document.querySelector('.js-balance');
@@ -27,6 +28,13 @@ function handleClickBtn(event) {
   const userOption = parseInt(optionPlayer.value);
   const userBet = parseInt(bet.value);
 
+  const validUserOption = userOption >= 1 && userOption <= 6;
+  const validUserBet = userBet >= 1 && userBet <= userBalance;
+  if (!validUserOption || !validUserBet) {
+    resultBet.innerHTML = 'Los valores introducidos no son válidos';
+    return;
+  }
+
   userBalance = userBalance - userBet;
   setUserBalance();
 
@@ -45,10 +53,16 @@ function handleClickBtn(event) {
   if (userBalance === 0) {
     buttonPlayGame.classList.add('hidden');
     buttonRestart.classList.remove('hidden');
+    move.classList.add('hidden');
+    optionPlayer.classList.add('hidden');
+    bet.classList.add('hidden');
     resultBet.innerHTML = 'No puedes seguir jugando, la maquina ha ganado!';
   } else if (userBalance >= 200) {
     buttonPlayGame.classList.add('hidden');
     buttonRestart.classList.remove('hidden');
+    move.classList.add('hidden');
+    optionPlayer.classList.add('hidden');
+    bet.classList.add('hidden');
     resultBet.innerHTML = 'No puedes seguir jugando, has ganado!';
   }
 }
@@ -63,6 +77,9 @@ function handleClickBtnRestart(event) {
 
   buttonPlayGame.classList.remove('hidden');
   buttonRestart.classList.add('hidden');
+  move.classList.remove('hidden');
+  optionPlayer.classList.remove('hidden');
+  bet.classList.remove('hidden');
   resultBet.innerHTML = 'Vamos a jugar!';
 }
 
