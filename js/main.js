@@ -30,6 +30,9 @@ function handleClickBtn(event) {
   userBalance = userBalance - userBet;
   setUserBalance();
 
+  bet.value = '';
+  optionPlayer.selectedIndex = 0;
+
   if (machineOption === userOption) {
     userBalance += userBet * 2;
     resultBet.innerHTML = 'Has ganado el doble de lo apostado!';
@@ -55,7 +58,7 @@ function handleClickBtnRestart(event) {
 
   userBalance = defaultBalance;
   setUserBalance();
-  optionPlayer.value = 'placeholder';
+  optionPlayer.selectedIndex = 0;
   bet.value = '';
 
   buttonPlayGame.classList.remove('hidden');
