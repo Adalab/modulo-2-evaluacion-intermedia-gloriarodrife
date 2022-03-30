@@ -31,7 +31,7 @@ function handleClickBtn(event) {
   const validUserOption = userOption >= 1 && userOption <= 6;
   const validUserBet = userBet >= 1 && userBet <= userBalance;
   if (!validUserOption || !validUserBet) {
-    resultBet.innerHTML = 'Los valores introducidos no son válidos';
+    resultBetText('Los valores introducidos no son válidos');
 
     return;
   }
@@ -43,9 +43,9 @@ function handleClickBtn(event) {
 
   if (machineOption === userOption) {
     userBalance += userBet * 2;
-    resultBet.innerHTML = 'Has ganado el doble de lo apostado!';
+    resultBetText('Has ganado el doble de lo apostado!');
   } else {
-    resultBet.innerHTML = 'Has perdido lo apostado!';
+    resultBetText('Has perdido lo apostado!');
   }
 
   setUserBalance();
@@ -56,20 +56,23 @@ function handleClickBtn(event) {
     move.classList.add('hidden');
     optionPlayer.classList.add('hidden');
     bet.classList.add('hidden');
-    resultBet.innerHTML = 'No puedes seguir jugando, la maquina ha ganado!';
+    resultBetText('No puedes seguir jugando, la maquina ha ganado!');
   } else if (userBalance >= 200) {
     buttonPlayGame.classList.add('hidden');
     buttonRestart.classList.remove('hidden');
     move.classList.add('hidden');
     optionPlayer.classList.add('hidden');
     bet.classList.add('hidden');
-    resultBet.innerHTML = 'No puedes seguir jugando, has ganado!';
+    resultBetText('No puedes seguir jugando, has ganado!');
   }
 
   function totalUserBalance() {
     userBalance = userBalance - userBet;
     setUserBalance();
   }
+}
+function resultBetText(text) {
+  resultBet.innerHTML = text;
 }
 
 function handleClickBtnRestart(event) {
@@ -85,7 +88,7 @@ function handleClickBtnRestart(event) {
   move.classList.remove('hidden');
   optionPlayer.classList.remove('hidden');
   bet.classList.remove('hidden');
-  resultBet.innerHTML = 'Vamos a jugar!';
+  resultBetText('Vamos a jugar!');
 }
 
 setUserBalance();
