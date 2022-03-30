@@ -32,11 +32,11 @@ function handleClickBtn(event) {
   const validUserBet = userBet >= 1 && userBet <= userBalance;
   if (!validUserOption || !validUserBet) {
     resultBet.innerHTML = 'Los valores introducidos no son válidos';
+
     return;
   }
 
-  userBalance = userBalance - userBet;
-  setUserBalance();
+  totalUserBalance();
 
   bet.value = '';
   optionPlayer.selectedIndex = 0;
@@ -64,6 +64,11 @@ function handleClickBtn(event) {
     optionPlayer.classList.add('hidden');
     bet.classList.add('hidden');
     resultBet.innerHTML = 'No puedes seguir jugando, has ganado!';
+  }
+
+  function totalUserBalance() {
+    userBalance = userBalance - userBet;
+    setUserBalance();
   }
 }
 
